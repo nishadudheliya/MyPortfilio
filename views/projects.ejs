@@ -1,0 +1,115 @@
+<!--
+File: project.ejs
+Name: Nisha Dudheliya
+StudentId: 301230457
+Date: June 3, 2022
+-->
+<%- include ("partials/header") -%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel='stylesheet' href='/stylesheets/style.css' />   
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Center website */
+.main {
+  max-width: 1050px;
+  margin: auto;
+  padding-bottom: 35px;
+}
+
+h1 {
+  font-size: 50px;
+  word-break: break-all;
+}
+.projectimg {
+  height: 260px;
+}
+
+.row {
+  margin: 8px -16px;
+}
+
+/* Add padding BETWEEN each column */
+.row,
+.row > .column {
+  padding: 8px;
+}
+
+/* Create four equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 33%;
+}
+
+/* Clear floats after rows */ 
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Content */
+.content {
+  background-color: white;
+  padding: 10px;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 900px) {
+  .column {
+    width: 50%;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="main">
+
+<h2>Projects</h2>
+
+<!-- Portfolio Gallery  -->
+<div class="row">
+  <div class="column">
+    <div class="content">
+      <img class="projectimg" src="/images/project1.jpg" alt="project1" style="width:100%">
+      <h3>Daily Work Update System</h3>
+      <p>This system allows employees to add their daily work and time spend in the job. All the information of the employee can be view by the admin. Employee can add new task, descriptio, hours and project details</p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+    <img class="projectimg" src="/images/project2.png" alt="project2" style="width:100%">
+      <h3>Library Management System</h3>
+      <p>In this system book and students details are stored. The book issue and return along with the penalty. Signup with third party application is integration in this system. Users have different roles and permisiions. </p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="content">
+    <img class="projectimg" src="/images/project3.png" alt="project3" style="width:100%">
+      <h3>Task Management System</h3>
+      <p>In this system user can signin to the system and add their skill and other information if the want to earn money whereas, they can also post job and hire someone to do their task.
+          Payment mentods is also intergated.
+      </p>
+    </div>
+  </div>
+ <!-- END GRID -->
+</div>
+</div>
+
+</body>
+</html>
+<%- include ("partials/footer") -%>

@@ -1,0 +1,72 @@
+<%- include ("partials/header") -%>
+<div class="container mt-3">
+  <h2>Register</h2>
+  <form action="/user/register" method="POST">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input
+        type="name"
+        name="username"
+        placeholder="Enter name"
+        value="<%= typeof username !='undefined'? username:''%>"
+      />
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        name="email"
+        placeholder="Enter Email"
+        value="<%= typeof email !='undefined'? email:''%>"
+      />
+    </div>
+    <div class="form-group">
+      <label for="dob">Dob</label>
+      <input
+        type="date"
+        name="dob"
+        placeholder="Enter dob"
+        value="<%= typeof dob !='undefined'? dob:''%>"
+      />
+    </div>
+    <div class="form-group">
+      <label for="gender">Gender</label>
+      <input
+        type="name"
+        name="gender"
+        placeholder="Enter gender"
+        value="<%= typeof gender !='undefined'? gender:''%>"
+      />
+    </div>
+    <div class="form-group">
+      <label for="contact_number">Contact Number</label>
+      <input
+        type="number"
+        name="contact_number"
+        placeholder="Enter contact number"
+        value="<%= typeof contact_number !='undefined'? contact_number:''%>"
+      />
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        name="password"
+        placeholder="Enter Password"
+        value="<%= typeof password !='undefined'? password:''%>"
+      />
+    </div>
+    <div class="form-group">
+      <label for="name">Confirm Password</label>
+      <input
+        type="password"
+        name="password2"
+        placeholder="Confirm password"
+        value="<%= typeof name !='undefined'? name:''%>"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Register</button>
+  </form>
+  <p>Have an account? <a href="/user/login">Login</a></p>
+</div>
+<%- include('partials/footer') -%>

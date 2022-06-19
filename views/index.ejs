@@ -1,0 +1,41 @@
+<!--
+File: index.ejs
+Name: Nisha Dudheliya
+StudentId: 301230457
+Date: June 3, 2022
+-->
+<%- include ("partials/header") -%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/@fortawesome/fontawesome-free/css/all.min.css">
+  <link rel='stylesheet' href='/stylesheets/style.css' />  
+  <style>
+   p {
+     font-size: 18px;
+     padding-bottom: 10px;
+   }
+  </style> 
+</head>
+
+<div>
+    <h1 class="center padding">Welcome to my portfolio</h1>
+    <p class="center">"To lead by promoting innovative thinking and foresight so that our team may develop technology solutions that will better the lives of people."</p>
+    <div class="center">
+      <img style="width: 500px; height:400px" src="/images/coder.gif"/>
+    </div>
+    <div class="center">
+      <button type="submit" class="btn btn-color bg-dark btn-block mt-1">
+       <a href="/user/login">Login </a>         
+      </button>
+    </div>
+
+</div>
+
+</html>
+
+<%- include ("partials/footer") -%>

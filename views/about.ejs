@@ -1,0 +1,77 @@
+<!--
+File: about.ejs
+Name: Nisha Dudheliya
+StudentId: 301230457
+Date: June 3, 2022
+-->
+<%- include ("partials/header") -%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/@fortawesome/fontawesome-free/css/all.min.css">
+  <link rel='stylesheet' href='/stylesheets/style.css' />   
+<style>
+    .content{
+    position: absolute;
+    top: 35%;
+    left: 8%;
+}
+.content .title{
+    color: #1f1f25;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    display: inline-block;
+    margin-bottom: 20px;
+    background: linear-gradient(120deg, #737277 20.69%, #b7b5bc 50.19%,#8d8d97 79.69%);
+}
+.content h1{
+    color: #1f1f25;
+    font-size: 75px;
+    font-weight: 900;
+    line-height: 90px;
+    text-transform: inherit;
+    width: 70%;
+}
+.content h1 span{
+    color: #a7384b;
+}
+.content p{
+    width: 55%;
+    color: #757575;
+    margin-top: 25px;
+    margin-bottom: 30px;
+}
+.myDiv {
+    display: flex;
+    justify-content: end;
+    margin: 10px 50px;
+}
+.impPic {
+    height: 595px;
+    width: 500px;
+}
+.p_r10 {
+    padding-right: 10px;
+}
+</style>
+</head>
+<body>
+<h2 class="center">About me</h2>
+<div class="myDiv">
+    <div>
+        <img class="impPic" src="/images/mypic.jpeg" class="logo">
+    </div>
+    <div class="content">
+        <span class="title">MEAN Stack Web Developer</span> 
+        <h1>Hello, I’m <span>Nisha Dudheliya</span></h1>
+        <p>I’m working on a professional, visually sophisticated and technologically proficient, responsive and multi-functional Angular Template.</p>
+        <a href="/resume/NishaDudheliya_Resume.pdf" download="NishaDudheliya_Resume.pdf"><i class="fas fa-download p_r10"></i>Download Resume</a>
+    </div>
+</div>
+</body> 
+<%- include ("partials/footer") -%>

@@ -1,0 +1,41 @@
+/*
+File: style.css
+Name: Nisha Dudheliya
+StudentId: 301230457
+Date: June 3, 2022
+*/
+
+body {
+    background-color: #f1f1f1;
+    padding: 5px 0px;
+    font-family: Arial;
+}  
+  a {
+    color: #00B7FF;
+  }
+  
+  .center {
+    align-items: center;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    width:100%;
+  }
+
+  .padding {
+      padding: 30px 10px 15px 10px;
+  }
+
+  .margin {
+      margin: 10px 40px;
+      color: #585050;
+  }
+
+  .btn-color {
+    color: #fff;
+    
+  }
+
+  .btn-color :hover {
+    color: #0a58ca;
+}
