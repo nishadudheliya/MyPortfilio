@@ -1,4 +1,4 @@
-const User = require("../models/User");
+const User = require("../models/user");
 
 /* GET Login page controller */
 exports.login = function (req, res) {
