@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
-const User = require("../models/User");
+const User = require("../models/user");
 
 const { forwardAuthenticated } = require("../config/authGuard");
 let authController = require("../controller/login");

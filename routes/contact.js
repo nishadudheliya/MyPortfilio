@@ -15,13 +15,13 @@ route.get("/add-contact", ensureAuthenticated, services.add_contact);
  *  @description update contact
  *  @method GET /update-contact
  */
-route.get("/update-contact", ensureAuthenticated, services.update_contact);
+// route.get("/update-contact", ensureAuthenticated, services.update_contact);
 
 // API
 route.post("/api/contact", controller.create);
 route.get("/api/contact", controller.find);
 route.get("/", controller.displayContactList);
-route.put("/api/contact/:id", controller.update);
-route.delete("/api/contact/:id", controller.delete);
+route.put("/", controller.update);
+route.delete("/", controller.delete);
 
 module.exports = route;

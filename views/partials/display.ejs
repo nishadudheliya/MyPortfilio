@@ -11,7 +11,7 @@
         >
           <span class="text-gradient"><i class="fas fa-pencil-alt"></i></span>
         </a>
-        <a class="btn border-shadow delete" data-id="<%=contact[i]._id%>">
+        <a class="btn border-shadow delete" href="/dashboard/delete-contact?id=<%= contact[i]._id%>" data-id="<%=contact[i]._id%>">
           <span class="text-gradient"><i class="fas fa-times"></i></span>
         </a>
       </td>

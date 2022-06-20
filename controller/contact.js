@@ -105,12 +105,12 @@ exports.delete = (req, res) => {
   Contact.findByIdAndDelete(id)
     .then((data) => {
       if (!data) {
-        res
-          .status(404)
-          .send({ message: `Cannot Delete with id ${id}. Maybe id is wrong` });
+        res.redirect('/')
       } else {
-        res.send({
-          message: "User was deleted successfully!",
+        res.render("display-contact", {
+          title: "Business Contact",
+          contact: contact,
+          displayName: req.user ? req.user.displayName : "",
         });
       }
     })

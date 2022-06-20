@@ -19,34 +19,34 @@
 
     <!-- add user form -->
     <!-- form handling -->
-    <form method="POST" id="update_user" class="login-box">
+    <form method="POST" action="update_contact" id="update_user" class="login-box">
       <div class="new_user">
         <div class="form-group mt-3">
           <label for="name" class="text-dark">Name</label>
-          <input type="hidden" name="id" value="<%= user._id %>" />
+          <input type="hidden" name="id" value="<%= contact._id %>" />
           <input
             type="text"
             name="name"
-            value="<%= user.name %>"
+            value="<%= contact.name %>"
             placeholder="Mark Stoenis"
-          />
+          />+
         </div>
         <div class="form-group mt-3">
           <label for="Email" class="text-dark">Email</label>
           <input
             type="text"
             name="email"
-            value="<%= user.email%>"
+            value="<%= contact.email%>"
             placeholder="example@gmail.com"
           />
         </div>
         <div class="form-group mt-3">
-          <label for="Email" class="text-dark">Email</label>
+          <label for="phone" class="text-dark">Phone</label>
           <input
-            type="phone"
+            type="number"
             name="phone"
-            value="<%= user.phone%>"
-            placeholder="example@gmail.com"
+            value="<%= contact.phone%>"
+            placeholder="999999999"
           />
         </div>
         <div class="form-group mt-3">

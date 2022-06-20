@@ -2,7 +2,7 @@ const axios = require("axios");
 const dotenv = require("dotenv");
 dotenv.config({ path: "config.env" });
 const URL =
-  process.env.URL ||
+process.env.PORT ||
   "https://nishadudheliya-portfolio.herokuapp.com/" ||
   "http://localhost:3000/";
 exports.homeRoutes = (req, res) => {

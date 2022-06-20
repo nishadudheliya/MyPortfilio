@@ -8,6 +8,7 @@
 require("./config/passport")(passport);
 
  var db = configDB();
+ 
  var port = normalizePort(process.env.PORT || '3000');
  app.set('port', port);
 app.use( express.static( "public" ) ); 
