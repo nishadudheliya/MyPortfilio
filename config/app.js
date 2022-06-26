@@ -8,7 +8,9 @@ let session = require('express-session');
 var indexRouter = require('../routes/index');
 var userRouter = require('../routes/user');
 var contactRouter = require('../routes/contact');
+let flash = require('connect-flash');
 
+let passport = require('passport');
 
 // Instantiate Express
 var app = express();
@@ -18,6 +20,11 @@ app.use(session({
   resave: true,
   secret: "sessionSecret"
 }));
+
+
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
 // view engine setup
 app.set('views', path.join(__dirname, '../views'));

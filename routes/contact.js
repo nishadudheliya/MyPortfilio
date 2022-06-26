@@ -1,18 +1,12 @@
-const express = require("express");
-const router = express.Router();
+var express = require('express');
+var router = express.Router();
 const services = require("../services/contact");
 const controller = require("../controller/contact");
 
-
-/**
- *  @description add contact
- *  @method GET /add-contact
- */
-
- function ensureAuthenticated(req, res, next)
+function ensureAuthenticated(req, res, next)
  {
      // check if the user is logged in
-     if(!req.isAuthenticated())
+     if(! req.isAuthenticated())
      {
          req.session.url = req.originalUrl;
          return res.redirect('/user/login');

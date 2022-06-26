@@ -8,36 +8,35 @@ router.get("/login", authController.login);
 
 router.get("/register", authController.register);
 router.post("/login", authController.signin);
-router.get('/logout', authController.signout);
+router.get("/logout", authController.signout);
 
 router.post("/register", (req, res) => {
-  if (!req.body  && req.body.password !== req.body.password_confirm) {
-    res.status(400).send({ message: "Content can not be emtpy!" });
-    return;
-  }
-  // new contact
-  const user = new User({
-    username: req.body.username,
-    email: req.body.email,
-    dob: req.body.dob,
-    gender: req.body.gender,
-    contact_number: req.body.contact_number,
-    password: req.body.password,
-  });
-  // save contact in the database
-  user
-    .save(user)
-    .then((data) => {
-     // res.send(data)
-      res.redirect("/user/login");
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message:
-          err.message ||
-          "Some error occurred while creating a create operation",
+  if (!req.user && req.body.password === req.body.password_confirm) {
+    console.log(req.body);
+
+    let user = new User(req.body);
+    user.provider = 'local';
+    console.log(user);
+
+    user.save((err) => {
+      if (err) {
+        let message = getErrorMessage(err);
+
+        req.flash('error', message);
+        return res.render('user/register', {
+          title: 'Sign-up Form',
+          messages: req.flash('error'),
+          user: user
+        });
+      }
+      req.login(user, (err) => {
+        if (err) return next(err);
+        return res.redirect('/');
       });
     });
+  } else {
+    return res.redirect('/');
+  }
   });
 
 
