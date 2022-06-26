@@ -19,7 +19,7 @@
 
     <!-- add user form -->
     <!-- form handling -->
-    <form method="POST" action="update_contact" id="update_user" class="login-box">
+    <form method="POST" id="update_user" class="login-box"> 
       <div class="new_user">
         <div class="form-group mt-3">
           <label for="name" class="text-dark">Name</label>
@@ -29,7 +29,7 @@
             name="name"
             value="<%= contact.name %>"
             placeholder="Mark Stoenis"
-          />+
+          />
         </div>
         <div class="form-group mt-3">
           <label for="Email" class="text-dark">Email</label>
@@ -53,6 +53,10 @@
           <button type="submit" class="btn btn-danger text-dark update">
             Save
           </button>
+          <a href="/dashboard" class="btn btn-warning">
+            <i class="fas fa-undo"></i> 
+            Cancel
+        </a>
         </div>
       </div>
     </form>

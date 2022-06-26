@@ -1,4 +1,5 @@
 const User = require("../models/user");
+let passport = require('passport');
 
 /* GET Login page controller */
 exports.login = function (req, res) {
@@ -8,6 +9,19 @@ exports.login = function (req, res) {
 /* GET register page controller */
 exports.register = function (req, res) {
   res.render("register", { title: "Register" });
+};
+
+module.exports.signin = function(req, res, next){
+  passport.authenticate('local', {   
+    successRedirect: req.session.url || '/dashboard',
+    failureRedirect: '/user/register',
+  })(req, res, next);
+  delete req.session.url;
+};
+
+module.exports.signout = function(req, res, next) {
+  req.logout();
+  res.redirect('/');
 };
 
 

@@ -44,6 +44,27 @@ exports.create = (req, res) => {
     });
 };
 
+exports.displayEditPage = (req, res, next) => {
+  let id = req.params.id;
+
+  Contact.findById(id, (err, contact) => {
+      if(err)
+      {
+          console.log(err);
+          res.end(err);
+      }
+      else
+      {
+          //show the edit view
+          res.render('update_contact', {
+              title: 'Edit Item', 
+              contact: contact
+          })
+      }
+  });
+}
+
+
 // retrieve and return all contact/ retrive and return a single contact
 exports.find = (req, res) => {
   if (req.query.id) {
@@ -78,45 +99,47 @@ exports.find = (req, res) => {
 
 // Update a new idetified contact by contact id
 exports.update = (req, res) => {
+
+  let id = req.params.id
+
+  let updatedItem = Contact({
+    _id: req.body.id,
+    name: req.body.name,
+    email: req.body.email,
+    phone: req.body.phone,
+  });
+
+  Contact.updateOne({_id: id}, updatedItem, (err) => {
+      if(err)
+      {
+          console.log(err);
+          res.end(err);
+      }
+      else
+      {
+          res.redirect('/dashboard');
+      }
+  });
   if (!req.body) {
     return res.status(400).send({ message: "Data to update can not be empty" });
   }
-
-  const id = req.params.id;
-  Contact.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
-    .then((data) => {
-      if (!data) {
-        res.status(404).send({
-          message: `Cannot Update contact with ${id}. Maybe contact not found!`,
-        });
-      } else {
-        res.send(data);
-      }
-    })
-    .catch((err) => {
-      res.status(500).send({ message: "Error Update contact information" });
-    });
 };
 
 // Delete a contact with specified contact id in the request
 exports.delete = (req, res) => {
-  const id = req.params.id;
 
-  Contact.findByIdAndDelete(id)
-    .then((data) => {
-      if (!data) {
-        res.redirect('/')
-      } else {
-        res.render("display-contact", {
-          title: "Business Contact",
-          contact: contact,
-          displayName: req.user ? req.user.displayName : "",
-        });
+  let id = req.params.id;
+
+  Contact.remove({_id: id}, (err) => {
+      if(err)
+      {
+          console.log(err);
+          res.end(err);
       }
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: "Could not delete User with id=" + id,
-      });
-    });
+      else
+      {
+          // refresh the contact list
+          res.redirect('/dashboard');
+      }
+  });
 };

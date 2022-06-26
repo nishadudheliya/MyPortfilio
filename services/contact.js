@@ -1,5 +1,6 @@
 const axios = require("axios");
 const dotenv = require("dotenv");
+var Contact = require("../models/contact");
 dotenv.config({ path: "config.env" });
 const URL =
 process.env.PORT ||
@@ -24,18 +25,21 @@ exports.add_contact = (req, res) => {
 };
 
 exports.update_contact = (req, res) => {
-  axios
-    .get(`${URL}` + `dashboard/api/contact`, {
-      params: { id: req.query.id },
-    })
-    .then(function (userdata) {
-      console.log(userdata.data);
-      res.render("update_contact", {
-        user: userdata.data,
-        title: "Update Contact",
-      });
-    })
-    .catch((err) => {
-      res.send(err);
-    });
+  let id = req.params.id;
+
+  Contact.findById(id, (err, itemToEdit) => {
+      if(err)
+      {
+          console.log(err);
+          res.end(err);
+      }
+      else
+      {
+          //show the edit view
+          res.render('update_contact', {
+              title: 'Edit Item', 
+              contact: itemToEdit
+          })
+      }
+  });
 };

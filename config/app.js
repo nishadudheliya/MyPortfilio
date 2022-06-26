@@ -4,7 +4,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+let session = require('express-session');
 var indexRouter = require('../routes/index');
 var userRouter = require('../routes/user');
 var contactRouter = require('../routes/contact');
@@ -12,6 +12,12 @@ var contactRouter = require('../routes/contact');
 
 // Instantiate Express
 var app = express();
+
+app.use(session({
+  saveUninitialized: true,
+  resave: true,
+  secret: "sessionSecret"
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, '../views'));

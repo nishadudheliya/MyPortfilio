@@ -1,6 +1,5 @@
 const express = require("express");
-const route = express.Router();
-const { ensureAuthenticated } = require("../config/authGuard");
+const router = express.Router();
 const services = require("../services/contact");
 const controller = require("../controller/contact");
 
@@ -9,19 +8,32 @@ const controller = require("../controller/contact");
  *  @description add contact
  *  @method GET /add-contact
  */
-route.get("/add-contact", ensureAuthenticated, services.add_contact);
+
+ function ensureAuthenticated(req, res, next)
+ {
+     // check if the user is logged in
+     if(!req.isAuthenticated())
+     {
+         req.session.url = req.originalUrl;
+         return res.redirect('/user/login');
+     }
+     next();
+ }
+
+router.get("/add-contact",  services.add_contact);
 
 /**
  *  @description update contact
  *  @method GET /update-contact
  */
-// route.get("/update-contact", ensureAuthenticated, services.update_contact);
+ router.get("/edit/:id", ensureAuthenticated, controller.displayEditPage);
 
 // API
-route.post("/api/contact", controller.create);
-route.get("/api/contact", controller.find);
-route.get("/", controller.displayContactList);
-route.put("/", controller.update);
-route.delete("/", controller.delete);
+router.post("/api/contact", ensureAuthenticated, controller.create);
+router.get("/api/contact", controller.find);
+router.get("/", controller.displayContactList);
+router.post("/edit/:id", ensureAuthenticated, controller.update);
+router.get("/delete/:id", ensureAuthenticated, controller.delete);
 
-module.exports = route;
+
+module.exports = router;

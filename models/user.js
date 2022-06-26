@@ -1,36 +1,102 @@
-// Import
 let mongoose = require('mongoose');
+let crypto = require('crypto');
+let Schema = mongoose.Schema;
 
-// Create a model class
-let userModel = mongoose.Schema({
-    username: {
+let UserSchema = mongoose.Schema(
+    {
+      username: {
         type: String,
-        required: true,
-      },
-      email: {
-        type: String,
-        required: true,
         unique: true,
-      },
-      dob: {
-        type: Date,
-        required: true,
-      },
-      gender: {
-        type: String,
-        required: true,
-      },
-      contact_number: {
-        type: Number,
-        required: true,
-      },
-      password: {
-        type: String,
-        required: true,
-      }
+        required: 'Username is required',
+        trim: true
     },
+        email: {
+            type: String,
+            match: [/.+\@.+\..+/, "Please fill a valid e-mail address"]
+        },
+        dob: {
+          type: Date,
+          required: true,
+        },
+        gender: {
+          type: String,
+          required: true,
+        },
+        contact_number: {
+          type: Number,
+          required: true,
+        },
+        password: {
+            type: String,
+            validate: [(password) => {
+                return password && password.length > 6;
+            }, 'Password should be longer']
+        },
+        salt: {
+            type: String
+        },
+        created: {
+            type: Date,
+            default: Date.now
+        }
+    },
+    {
+        collection: "user"
+    }
 );
 
-const User = mongoose.model("User", userModel );
+UserSchema.virtual('fullName')
+.get(function() {
+    return this.firstName + ' ' + this.lastName;
+})
+.set(function(fullName) {
+    let splitName = fullName.split(' ');
+    this.firstName = splitName[0] || '';
+    this.lastName = splitName[1] || '';
+});
 
-module.exports = User;
+UserSchema.pre('save', function(next) {
+    if (this.password) {
+        this.salt = Buffer.from(crypto.randomBytes(16).toString('base64'), 'base64');
+        this.password = this.hashPassword(this.password);
+    }
+    next();
+});
+
+UserSchema.methods.hashPassword = function(password) {
+    return crypto.pbkdf2Sync(password, this.salt, 10000, 64, 'sha512').toString('base64');
+};
+
+UserSchema.methods.authenticate = function(password) {
+    return this.password === this.hashPassword(password);
+};
+
+UserSchema.statics.findUniqueUsername = function(username, suffix,
+    callback) {
+    var possibleUsername = username + (suffix || '');
+    this.findOne({
+        username: possibleUsername
+    }, (err, user) => {
+        if (!err) {
+            if (!user) {
+                callback(possibleUsername);
+            } else {
+                return this.findUniqueUsername(username, (suffix || 0) +
+                    1, callback);
+            }
+        } else {
+            callback(null);
+        }
+    });
+};
+
+UserSchema.set('toJSON', {
+    getters: true,
+    virtuals: true
+});
+
+module.exports = mongoose.model('User', UserSchema);
+
+
+
+

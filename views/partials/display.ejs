@@ -5,15 +5,12 @@
       <td><%= contact[i].email %></td>
       <td><%= contact[i].phone %></td>
       <td>
-        <a
-          href="/dashboard/update-contact?id=<%= contact[i]._id%>"
-          class="btn border-shadow update"
-        >
-          <span class="text-gradient"><i class="fas fa-pencil-alt"></i></span>
-        </a>
-        <a class="btn border-shadow delete" href="/dashboard/delete-contact?id=<%= contact[i]._id%>" data-id="<%=contact[i]._id%>">
-          <span class="text-gradient"><i class="fas fa-times"></i></span>
-        </a>
-      </td>
+        <a href="/dashboard/edit/<%= contact[i]._id %>" class="btn btn-primary btn-sm">
+        <i class="fas fa-pencil-alt"></i></a>
+    </td>
+    <td>
+        <a href="/dashboard/delete/<%= contact[i]._id %>" class="btn btn-danger btn-sm">
+        <i class="fas fa-trash-alt"></i></a>
+    </td>
     </tr>
 <% } %>
